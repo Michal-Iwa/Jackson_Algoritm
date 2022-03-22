@@ -12,20 +12,36 @@ namespace Jackson_Algorithm
         public int countoftasks;
         public List<Task> listoftasks;
         public int countdone;
+        public int seed;
         public int Cmax;
         public Problem()
         {
             Cmax = 0;
             countdone = 0;
+            seed = 0;
             countoftasks = 0;
             listoftasks = new List<Task>();
         }
-        public Problem(int c)
+        public Problem(int s, int c)
         {
             Cmax = 0;
+            seed = s;
             countdone = 0;
             countoftasks = c;
             listoftasks = new List<Task>();
+        }
+        public void RandomElements()
+        {
+            Random random = new Random(seed);
+            int[] rpd = new int[3];
+
+            for (int i = 1; i <= countoftasks; i++)
+            {
+                rpd[0] = random.Next(countoftasks) + 1;
+                rpd[1] = random.Next(countoftasks) + 1;
+                rpd[2] = random.Next(countoftasks) + 1;
+                listoftasks.Add(new Task(i, rpd[0], rpd[1], rpd[2]));
+            }
         }
         public void Read_tasks_from_file()
         {
